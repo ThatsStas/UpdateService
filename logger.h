@@ -174,14 +174,15 @@ namespace attic
 		std::string getTime()
 		{
 			time_t t = time(0);
-			struct tm* n = localtime(&t);
+			struct tm n;
+			localtime_s(&n, &t);
 
-			std::string dateTime = std::to_string(n->tm_year + 1900)
-				+ "_" + ((n->tm_mon < 10) ? "0" + std::to_string(n->tm_mon) : std::to_string(n->tm_mon))
-				+ "_" + ((n->tm_mday < 10) ? "0" + std::to_string(n->tm_mday) : std::to_string(n->tm_mday))
-				+ "_" + ((n->tm_hour < 10) ? "0" + std::to_string(n->tm_hour) : std::to_string(n->tm_hour))
-				+ ":" + (n->tm_min < 10 ? "0" + std::to_string(n->tm_min) : std::to_string(n->tm_min))
-				+ ":" + (n->tm_sec < 10 ? "0" + std::to_string(n->tm_sec) : std::to_string(n->tm_sec));
+			std::string dateTime = std::to_string(n.tm_year + 1900)
+				+ "_" + ((n.tm_mon < 10) ? "0" + std::to_string(n.tm_mon) : std::to_string(n.tm_mon))
+				+ "_" + ((n.tm_mday < 10) ? "0" + std::to_string(n.tm_mday) : std::to_string(n.tm_mday))
+				+ "_" + ((n.tm_hour < 10) ? "0" + std::to_string(n.tm_hour) : std::to_string(n.tm_hour))
+				+ ":" + (n.tm_min < 10 ? "0" + std::to_string(n.tm_min) : std::to_string(n.tm_min))
+				+ ":" + (n.tm_sec < 10 ? "0" + std::to_string(n.tm_sec) : std::to_string(n.tm_sec));
 			return dateTime;
 		}
 
